@@ -1,0 +1,16 @@
+This is the OS/2 port of ABCTab2PS, a program which reads ABC music format files
+and typesets music in Postscript format.
+
+For more informations on this program and the ABC music language, please consult
+the documentation into the os2\doc subdirectory.
+
+Please note that I only built the software with GCC 4.52 under eComStation 2.0. I
+can't guarantee it will work safely on your system, but I don't think it will harm.
+Try it with the abc examples into os2\doc\examples and Ghostview to look at the results.
+
+If you find this program useful or interesting at all, please drop me a note to make sure
+OS/2 developing is still interesting.
+
+Mentore Siesto
+Pisa, Italy
+mentore.siesto@alice.it

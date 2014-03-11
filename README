@@ -1,0 +1,160 @@
+Readme for the abctab2ps source distribution
+============================================
+
+abctab2ps
+---------
+
+abctab2ps is a music and tablature typestting program which
+translates an input file in the abc language into postscript.
+It is based on Michael Methfessel's program abc2ps. While
+abc2ps can only typeset music, abctab2ps is an extension by 
+Christoph Dalitz that can also handle lute tablature.
+
+
+Requirements
+------------
+
+In order to use abctab2ps you need the following additional 
+software:
+
+  - a text editor for creating files in the abc language
+    (alternatively you can use flabc)
+  - a postscript interpreter (ghostscript or a postscript
+    printer) for viewing and printing the output files
+
+In order to compile abctab2ps from the sources, you need an
+ANSI C++ compiler with STL support. If you do not have a C++
+compiler or do not know how to use it, you should get one of
+the binary packages from the abctab2ps home page.
+
+There are reports of successful compilation of abctab2ps in
+the following environments:
+
+  Operating system      C-Compiler    Makefile (see src/)
+  ---------------------------------------------------------
+  Linux                 GNU           Makefile.Unix
+  Solaris               GNU           Makefile.Unix
+  Mint                  GNU           Makefile.Unix
+  Irix                  SGI           Makefile.Unix
+  Win32                 Cygnus        Makefile.Unix
+  Win32                 Mingw32       Makefile.Unix
+  Win32                 Borland       Makefile.Borland *)
+  MacOs 8.x/9.x         MPW           see Readme.macintosh
+  MacOs X               GNU           Makfile.Unix
+
+*) version 1.6.0 no longer compiles with Borland 5.x, because
+this C++ compiler does not support STL container classes with
+self defined data types.
+
+If you manage to compile abctab2ps in an environment not
+yet mentioned in the list above, please report it to the
+author and attach an appropriate makefile.
+
+
+Installation
+------------
+
+Notice for Unix users:
+If you already have a version of abctab2ps prior 1.2.0
+and have the environment variable ABCTABFONTS set to the
+font directory of your old installation, you must first
+uninstall your old version and unset ABCTABFONTS.
+This is necessary because the default font location
+has changed with version 1.2.0.
+
+To install abctab2ps from the source code package,
+do the following:
+
+  - unpack the TGZ-archive eg. with "tar xzf"
+  - Change to the subdirectory "src"
+  - Rename the makefile for your platform/compiler into
+    "Makefile", edit it and adjust the compiler flags
+    and installation directories to your system.
+  - To compile the source code:
+      o on Linux or OSX type "make"
+      o for a universal binary on Intel Macs type "make universal"
+      o on Windows type "make win32"
+  - For a test run on the file "sample.abc", you can type
+    "make test"
+  - To install abctab2ps to the directories specified
+    in the Makefile, type "make install"
+  - To remove all files generated during compilation,
+    type "make clean"
+  - If you want to uninstall abctab2ps, type "make uninstall"
+
+On Linux, if you have the ESP Package Manager (freely available
+from http://www.easysw.com/epm/), you can alternatively create
+an RPM (DEB) package with "make rpm" ("make deb") and then install
+the created package with "rpm -i ..." ("dpkg -i ...").
+If "make rpm" fails, see the FAQ for a common pitfall.
+
+If you install the abctab2ps fonts in some other directory than
+/usr/share/abctab2ps or /usr/local/share/abctab2ps, you must set the
+environment variable ABCTABFONTS to the full path of the directory
+containing the tablature font files.
+
+Under Unix, you can set ABCTABFONTS in /etc/profile, $HOME/.kshrc, 
+$HOME/.bashrc or your particular shell's profile. Under Windows NT 
+you can set it in the system settings menu, under Windows 9x you
+must set it in autoexec.bat and reboot (see the FAQ for more details).
+
+
+Usage and Documentation
+-----------------------
+
+In order to create a music/tablature score you must perform
+the following steps:
+
+  1) start an editor, enter the music in abc language and save 
+     it under a filename with the extension ".abc", eg. "bla.abc"
+
+  2) switch to the command line and call abctab2ps on that file, 
+     eg. "abctab2ps bla.abc". This will create the score as 
+     postscript graphics in the file "Out.ps".
+
+You will find the necessary documentation for both steps in the
+subdirectory "doc":
+
+  1) The User's Guide in the subdirectory "doc/userguide"
+     describes the abc language and is essential for step 1.
+     There is both a postscript version (for print out) and
+     a HTML version (for online reference).
+
+  2) The manual page in the subdirectory "doc/manpages" describes 
+     the invocation of abctab2ps and all command line parameters. 
+     It is essential for step 2. There is both a html version
+     and a nroff version (for online reference with "man").
+     If you run Unix and the installation with "make install" was 
+     successful, you should be able to read the man page with 
+     "man abctab2ps".
+
+  3) Some illustrative examples are in the subdirectory
+     "doc/examples".
+
+The postscript versions of the documentation are in ISO A4 format.
+To resize them to US letter format use the command
+     "psresize -PA4 -pletter old.ps new.ps"
+(psresize is part of the package "psutils")
+
+
+Copyright and Where to Get It
+-----------------------------
+
+Copyright (c) 1999-2007 by Christoph Dalitz
+
+abctab2ps is free software; you can redistribute it and/or modify
+it under the terms given in the file LICENSE. This is essentially
+the GNU General Public License with two modifications.
+
+abctab2ps is based on code from abc2ps by Michael Methfessel.
+This code is also provided under the terms of the GNU GPL.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+file LICENSE for more details.
+
+The latest and greatest version of abctab2ps is always available
+from:
+
+    http://www.lautengesellschaft.de/cdmm/

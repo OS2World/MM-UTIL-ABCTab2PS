@@ -1,0 +1,113 @@
+This Readme file assumes you have read the general Readme file. This file
+provides additional information for compiling abctab2ps on Mac OS 8/9.
+
+===============================================================
+This does NOT apply to MacOS X
+Under MacOS X, please follow the instructions for Unix.
+===============================================================
+
+Requirements
+------------
+
+Hardware:
+
+   - Macintosh PowerPC processor running OS 8.x or 9.x
+   - for 680x0 processors, look at the MPW documentation
+
+Suggestions for text editors on the Macintosh:
+
+   - Simpletext: comes with Mac OS 8/9
+   - Alpha: commercial programmable text editor; available from
+     http://www.kelehers.org/alpha/
+
+Postscript interpreter:
+
+   - MacGhostview; available from
+     http://www.cs.wisc.edu/%7Eghost/macos/gsv20b3.htm
+
+C Compiler:
+
+   - Macintosh Programmer's Workshop (MPW); available from
+     http://developer.apple.com/tools/mpw-tools/
+   - Make sure that you have at least version v3.8d3 of CarbonStdCLib.o
+     and the StdCLib headers; available from
+     http://developer.apple.com/tools/mpw-tools/updates.html
+
+C++ Standard Template Library:
+
+   - An STL-Version that works with MPW is available from
+     http://www.stlport.org/
+
+Installation
+------------
+
+   - Unpack the archive with StuffIt (available from 
+     www.aladdinsys.com, but provided with many programs as well).
+
+   - Start MPW.
+
+   - Choose "set directory" from the directory menu. In the list of 
+     directories that appear in the meanu, select the src folder.
+
+   - Rename the makefile Makefile.MPW to Makefile and in the Makefile, 
+     adjust the value of BINDIR to your liking.
+
+   - To compile the source code, type "make > makeout" in the Worksheet
+     window. This generates the build commands into the file makeout.
+     Next, type "makeout", which executes the commands.
+
+   - One step that needs to be done by hand (for now): set the 
+     available memory to abctab2ps in the following way.
+     Select the file abctab2ps in the src folder and from the File menu
+     in the Finder, select "Get Info > Memory", or type Command-I
+     and select "Memory" in the pull-down menu. Set the minimum and 
+     preferred sizes to at least 6000K. If you get "Out of memory" 
+     errors later, increase this size some more.
+
+   - For a test run on the file "sample.abc", type "make test > makeout"
+     and execute "makeout".
+
+   - To remove all files generated during compilation, type 
+     "make clean > makeout", followed by "makeout".
+
+   - To install abctab2ps, type "make install > makeout" and execute 
+     "makeout". This copies the abctab2ps file to the BINDIR.
+     Make sure the fonts folder is in the same directory as the executable.
+
+   - To uninstall abctab2ps, type "make uninstall > makeout" and 
+     execute "makeout".
+
+In the current Macintosh version, the ABCTABFONTS variable is always 
+set to ":fonts", i.e., the fonts folder should reside in the same 
+folder as the executable.
+
+Usage
+-----
+
+The Macintosh OS does not have a command line. This means that 
+options to the program must be passed in the .abc file itself (see 
+the abctab2ps user guide). For instance, if the command line would 
+have been
+
+   abctab2ps -noitaliantab -k 5 -tabsize 14
+
+the options will be passed to the program if the very first line of 
+the .abc file
+starts with %!, thus:
+
+   %!abctab2ps -noitaliantab -k 5 -tabsize 14
+
+Processing the .abc file is as easy as dragging the file on top of 
+the abctab2ps icon. This will create the postscript file Out.ps in 
+the abctab2ps folder. If you execute abctab2ps by double-clicking the 
+abctab2ps icon, the effect is the same as calling abctab2ps without 
+arguments. A window will be opened, which functions as stdin (see the 
+abctab2ps documentation).
+
+Contact information
+-------------------
+
+Address MacOS "Classic" specific questions to:
+
+Frank Nordberg
+frnordbe@online.no

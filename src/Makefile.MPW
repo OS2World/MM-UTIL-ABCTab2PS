@@ -1,0 +1,74 @@
+#
+# makefile for abctab2ps
+#
+# version for MPW C++ compiler 
+# on PowerPC
+#==============================
+
+
+# compilation options
+#------------------------------
+
+CC = MrCpp
+LD = PPCLink
+INCLUDES = -i : -i "{STL}" -i "{CIncludes}"
+CFLAGS = -w off -d MACINTOSH {Includes}
+LDFLAGS = -c 'siow' -t 'APPL' -w -mf
+LIBS = "{SharedLibraries}"StdCLib ¶
+	"{PPCLibraries}MrCIOStreams.o" ¶
+	"{STL}:lib:STLportLib{config_}.o" ¶
+	"{SharedLibraries}"InterfaceLib ¶
+	"{SharedLibraries}MathLib" ¶
+	"{PPCLibraries}"PPCSIOW.o ¶
+	"{PPCLibraries}PPCToolLibs.o" ¶
+	"{PPCLibraries}MrCPlusLib.o" ¶
+	"{SharedLibraries}MrCExceptionsLib_4.1" ¶
+	"{PPCLibraries}"PPCCRuntime.o
+
+# possible preprocessor options:
+CPPFLAGS = 
+
+# installation directories
+# (adjust to your preferences)
+#------------------------------
+
+# directory for the binary
+BINDIR = "{Boot}Desktop Folder:abctab2ps"
+
+# from here on, no alterations
+# should be necessary
+#--------------------------------
+
+PROGRAM = abctab2ps
+
+OBJECTS = abctab2ps.cpp.o parse.cpp.o ¶
+	syms.cpp.o style.cpp.o ¶
+	buffer.cpp.o format.cpp.o ¶
+	pssubs.cpp.o subs.cpp.o ¶
+	util.cpp.o music.cpp.o ¶
+	tab.cpp.o mpw.cpp.o
+
+
+{PROGRAM} Ä {OBJECTS}
+	{LD} -o {PROGRAM} {LDFLAGS} {LIBS} {OBJECTS}
+	Rez -a "{RIncludes}"SIOW.r -d DEFAULT_SAVE_PREF=1 -o {PROGRAM}
+
+.cpp.o Ä .cpp abctab2ps.h
+	{CC} -o {Default}.cpp.o {CFLAGS} {CPPFLAGS} {Default}.cpp
+
+test Ä
+	Set ABCTABFONTS ":fonts"
+	{PROGRAM} sample.abc
+
+install Ä
+	echo "Installing abctab2ps ..."
+	# install program
+	Duplicate {PROGRAM} {BINDIR}
+	echo "Done"
+
+uninstall Ä
+	# uninstall abctab2ps
+	Delete {BINDIR}:{PROGRAM}
+
+clean Ä
+	Delete -i Å.o {PROGRAM} Out.ps

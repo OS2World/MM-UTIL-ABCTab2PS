@@ -1,0 +1,67 @@
+#
+# makefile for abctab2ps
+#
+# version for MPW C compiler 
+# on PowerPC
+#==============================
+
+
+# compilation options
+#------------------------------
+
+CC = MrC
+LD = PPCLink
+CFLAGS = -w off -d MACINTOSH
+LDFLAGS = -c 'siow' -t 'APPL' -w -mf
+LIBS = "{SharedLibraries}"StdCLib ¶
+	"{SharedLibraries}"InterfaceLib ¶
+	"{PPCLibraries}"PPCSIOW.o ¶
+	"{PPCLibraries}"PPCCRuntime.o
+
+# possible preprocessor options:
+CPPFLAGS = 
+
+# installation directories
+# (adjust to your preferences)
+#------------------------------
+
+# directory for the binary
+BINDIR = "{Boot}Desktop Folder:abctab2ps"
+
+# from here on, no alterations
+# should be necessary
+#--------------------------------
+
+PROGRAM = abctab2ps
+
+OBJECTS = abctab2ps.c.o parse.c.o ¶
+	syms.c.o style.c.o ¶
+	buffer.c.o format.c.o ¶
+	pssubs.c.o subs.c.o ¶
+	util.c.o music.c.o ¶
+	tab.c.o mpw.c.o
+
+
+{PROGRAM} Ä {OBJECTS}
+	{LD} -o {PROGRAM} {LDFLAGS} {LIBS} {OBJECTS}
+	Rez -a "{RIncludes}"SIOW.r -d DEFAULT_SAVE_PREF=1 -o {PROGRAM}
+
+.c.o Ä .c abctab2ps.h
+	{CC} -o {Default}.c.o {CFLAGS} {CPPFLAGS} {Default}.c
+
+test Ä
+	Set ABCTABFONTS ":fonts"
+	{PROGRAM} sample.abc
+
+install Ä
+	echo "Installing abctab2ps ..."
+	# install program
+	Duplicate {PROGRAM} {BINDIR}
+	echo "Done"
+
+uninstall Ä
+	# uninstall abctab2ps
+	Delete {BINDIR}:{PROGRAM}
+
+clean Ä
+	Delete -i Å.o {PROGRAM} Out.ps
